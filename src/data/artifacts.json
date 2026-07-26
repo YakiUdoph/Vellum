@@ -1,0 +1,161 @@
+[
+  {
+    "id": "art-001",
+    "date": "2026-07-26",
+    "displayDate": "July 26, 2026",
+    "historicalDate": "1969 — Apollo 11 Return",
+    "title": "The Dust of Tranquility",
+    "subtitle": "Lunar Regolith Sample #10084, Collected at Tranquility Base",
+    "location": "Smithsonian National Air and Space Museum",
+    "museumCode": "NASM-ARC-1969-0720",
+    "era": "Space Age",
+    "category": "Space Exploration",
+    "coverImage": "https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=1200&q=80",
+    "narrative": [
+      "On July 24, 1969, three men returned to Earth bearing 21.5 kilograms of a world no human hand had touched before. Sealed inside a stainless steel vacuum container was Lunar Sample 10084—a fine gray dust that smelled, according to Buzz Aldrin, like spent gunpowder after a firefight.",
+      "This tiny vessel contained tiny glass spherules formed four billion years ago when meteors pulverized the primordial moon crust. When scientists first opened the container inside the Lunar Receiving Laboratory in Houston, they worked with arm-length heavy rubber gloves behind double glass partitions, afraid of lunar microbes.",
+      "What they discovered instead was an immaculate silence—a geologic archive preserved without rain, wind, or living memory since the solar system was young. For three days, humanity reached across 240,000 miles of vacuum to hold time itself."
+    ],
+    "quote": {
+      "text": "Here men from the planet Earth first set foot upon the Moon July 1969, A.D. We came in peace for all mankind.",
+      "author": "Plaque on the Descent Stage of Lunar Module Eagle"
+    },
+    "provenance": "Collected by Neil A. Armstrong and Edwin E. Aldrin Jr. at 0° 40' 26\" N, 23° 28' 22\" E.",
+    "audioGuideAvailable": true,
+    "initialEchoes": [
+      {
+        "id": "echo-101",
+        "author": "ApolloArchivist.nimiq",
+        "wallet": "NQ42 G8XK 99TL 31BM 78QR 90PL 44XX",
+        "text": "Standing before this glass case in Washington, you realize the entire arc of human curiosity rests in a handful of gray sand.",
+        "timestamp": "2026-07-26T08:14:00Z",
+        "currency": "USDT",
+        "amount": "0.10",
+        "txHash": "0x8f7a1c9e...42b0",
+        "verified": true
+      },
+      {
+        "id": "echo-102",
+        "author": "NimiqExplorer_99",
+        "wallet": "NQ19 B3KK 11AA 55ZZ 88MM 22QQ 77VV",
+        "text": "We leave footprints on Earth that wash away in rain. But on the Moon, those boots are still pressed into the dust right now.",
+        "timestamp": "2026-07-26T10:32:00Z",
+        "currency": "NIM",
+        "amount": "10.00",
+        "txHash": "0x3d9e2a7f...11a9",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "art-002",
+    "date": "2026-07-25",
+    "displayDate": "July 25, 2026",
+    "historicalDate": "1799 — Discovery of Rosetta Stone",
+    "title": "The Tri-Lingual Key",
+    "subtitle": "Granodiorite Stele Fragment Bearing the Decree of Memphis (196 BC)",
+    "location": "The British Museum, Room 4",
+    "museumCode": "BM-EA-24",
+    "era": "Ptolemaic Period",
+    "category": "Linguistics & Archaeology",
+    "coverImage": "https://images.unsplash.com/photo-1599839575945-a9e5af0c3fa5?auto=format&fit=crop&w=1200&q=80",
+    "narrative": [
+      "In July 1799, French soldiers rebuilding a fort near the port city of Rashid (Rosetta) uncovered a heavy dark stone slab built into an old wall. It measured 112 centimeters tall and weighed over 760 kilograms.",
+      "Carved into its polished dark face were three distinct bands of writing: Ancient Egyptian Hieroglyphs at the top, Demotic script in the center, and Ancient Greek at the bottom. For over fourteen centuries, no living soul on Earth had been able to read the sacred picture-writing of the Pharaohs.",
+      "It took Jean-François Champollion twenty-three years of obsessive study to crack the code. In September 1822, upon realizing that hieroglyphs represented both sounds and ideas, Champollion ran into his brother's office in Paris, shouted 'Je tiens mon affaire!' ('I've got it!') and collapsed unconscious for five days from pure exhaustion."
+    ],
+    "quote": {
+      "text": "Language is the memory of human civilization. When a script dies, a window into eternity closes until someone finds a key.",
+      "author": "Jean-François Champollion (1824)"
+    },
+    "provenance": "Discovered by Pierre-François Bouchard at Fort Julien near Rashid. Transferred to British custody under the Treaty of Alexandria (1801).",
+    "audioGuideAvailable": true,
+    "initialEchoes": [
+      {
+        "id": "echo-201",
+        "author": "Polyglot_Scribe",
+        "wallet": "NQ73 H2LL 44MM 88KK 11PP 33QQ 99AA",
+        "text": "Three scripts, one message, bridging two millennia. The original multi-signature contract.",
+        "timestamp": "2026-07-25T14:20:00Z",
+        "currency": "USDT",
+        "amount": "0.10",
+        "txHash": "0x4b2c8a11...90ef",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "art-003",
+    "date": "2026-07-24",
+    "displayDate": "July 24, 2026",
+    "historicalDate": "1977 — Launch of Voyager 1",
+    "title": "The Golden Record",
+    "subtitle": "12-inch Gold-Plated Copper Phonograph Disc for Deep Space",
+    "location": "Interstellar Space (Voyager 1 & 2 Probes)",
+    "museumCode": "JPL-VOY-1977-GR",
+    "era": "Late 20th Century",
+    "category": "Interstellar Archaeology",
+    "coverImage": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80",
+    "narrative": [
+      "Cruising past the outer edge of our solar system at 38,000 miles per hour is a 12-inch gold-plated copper disc enclosed in an aluminum protective jacket. On its cover are etched diagrammatic instructions: how to play the record, where our sun lies relative to 14 pulsars, and the decay rate of Uranium-238 to date its launch.",
+      "Curated by a committee led by Carl Sagan, the record holds 115 images of Earth life, greetings in 55 human languages, 90 minutes of world music—from Bach and Beethoven to Navajo chants and Blind Willie Johnson—and the recorded brainwaves of Ann Druyan thinking about love.",
+      "The Voyager probes will outlast our sun and our oceans. Long after humanity is gone or transformed, this gold disc will float silently through the cosmic dark—a bottle thrown into the ocean of space, holding our heartbeats."
+    ],
+    "quote": {
+      "text": "The spacecraft will be encountered and the record played only if there are advanced spacefaring civilizations in interstellar space. But the launching of this bottle into the cosmic ocean says something very hopeful about life on this planet.",
+      "author": "Carl Sagan"
+    },
+    "provenance": "Manufactured by Pyral S.A. and CBS Records, electroplated by James G. Lee. Mounted on Voyager 1 (launched Sept 5, 1977) and Voyager 2.",
+    "audioGuideAvailable": true,
+    "initialEchoes": [
+      {
+        "id": "echo-301",
+        "author": "CosmicStargazer",
+        "wallet": "NQ02 X99A 88BB 77CC 66DD 55EE 44FF",
+        "text": "Inscribing an echo here feels fitting. We are all sending tiny gold discs into the dark, hoping someone listens.",
+        "timestamp": "2026-07-24T19:05:00Z",
+        "currency": "NIM",
+        "amount": "10.00",
+        "txHash": "0x1177aa44...9988",
+        "verified": true
+      }
+    ]
+  },
+  {
+    "id": "art-004",
+    "date": "2026-07-23",
+    "displayDate": "July 23, 2026",
+    "historicalDate": "c. 150 BC — Antikythera Mechanism",
+    "title": "The First Analog Computer",
+    "subtitle": "37-Gear Bronze Celestial Calculator Recovered from Aegean Shipwreck",
+    "location": "National Archaeological Museum, Athens",
+    "museumCode": "NAM-ATH-15087",
+    "era": "Hellenistic Greece",
+    "category": "Ancient Technology",
+    "coverImage": "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1200&q=80",
+    "narrative": [
+      "In 1901, sponge divers taking shelter from a storm near the island of Antikythera brought up encrusted bronze fragments from a Roman shipwreck 45 meters beneath the surface. For decades, archaeologists thought it was an ordinary astrolabe.",
+      "Micro-CT scans in the 21st century revealed a masterpiece of mechanical wizardry: 30 precision bronze gear wheels with triangular teeth, meshed inside a wooden frame no larger than a mantle clock.",
+      "Turned by a hand crank, it predicted lunar phases, solar and lunar eclipses, planet positions across the zodiac, and even tracked the four-year cycle of the ancient Olympic Games. Nothing of equal mechanical complexity would emerge anywhere on Earth for another 1,400 years."
+    ],
+    "quote": {
+      "text": "If it had not been lost to the sea, the Industrial Revolution might have happened in ancient Alexandria.",
+      "author": "Derek J. de Solla Price"
+    },
+    "provenance": "Recovered by Symi sponge diver Elias Stadiatis in 1900–1901 from a shipwreck dated to 70–60 BC.",
+    "audioGuideAvailable": true,
+    "initialEchoes": [
+      {
+        "id": "echo-401",
+        "author": "ClockworkMind",
+        "wallet": "NQ33 K111 2222 3333 4444 5555 6666",
+        "text": "To think gears were calculating eclipses while the Parthenon stood whole. Genius is ancient.",
+        "timestamp": "2026-07-23T11:45:00Z",
+        "currency": "USDT",
+        "amount": "0.10",
+        "txHash": "0x9922ff11...33bb",
+        "verified": true
+      }
+    ]
+  }
+]
