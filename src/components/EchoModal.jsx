@@ -27,6 +27,7 @@ export default function EchoModal({
   setWalletState,
   onEchoInscribed,
   onOpenWalletModal,
+  onShowToast,
 }) {
   const [reflection, setReflection] = useState('');
   const [authorName, setAuthorName] = useState(walletState.displayName || 'VellumExplorer.nimiq');
@@ -115,12 +116,29 @@ export default function EchoModal({
       if (onEchoInscribed) {
         onEchoInscribed(newEcho);
       }
+
+      if (onShowToast) {
+        onShowToast({
+          type: 'success',
+          title: 'Payment Successful',
+          message: `Inscribed ${price} ${selectedCurrency} echo. Earned +${result.pointsEarned} PTS!`,
+        });
+      }
     } catch (err) {
+      console.error("Transaction failed or was cancelled:", err);
       setStatus('error');
       setErrorObj({
         code: err.code || 'UNKNOWN_ERROR',
         message: err.message || 'Payment execution encountered an unexpected issue.',
       });
+
+      if (onShowToast) {
+        onShowToast({
+          type: err.code === ERROR_CODES.USER_CANCELLED ? 'warning' : 'error',
+          title: err.code === ERROR_CODES.USER_CANCELLED ? 'Transaction Cancelled' : 'Payment Failed',
+          message: err.message || 'Transaction could not be completed.',
+        });
+      }
     }
   };
 

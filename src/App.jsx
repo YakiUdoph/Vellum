@@ -7,6 +7,8 @@ import OnboardingModal from './components/OnboardingModal';
 import SavedCollectionModal from './components/SavedCollectionModal';
 import MobileBottomNav from './components/MobileBottomNav';
 import MuseumSoundscape from './components/MuseumSoundscape';
+import NimiqProviderBanner from './components/NimiqProviderBanner';
+import ToastContainer from './components/ToastContainer';
 import artifactsData from './data/artifacts.json';
 import { getSavedWalletState } from './utils/nimiqPay';
 import { getUserStreak, recordDailyVisit } from './utils/streak';
@@ -22,7 +24,21 @@ export default function App() {
   const [savedCollectionOpen, setSavedCollectionOpen] = useState(false);
   const [savedArtifactIds, setSavedArtifactIds] = useState(['artifact-alexandria-01']);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const [toasts, setToasts] = useState([]);
   const echoFee = { usdt: '0.01', nim: '1' };
+
+  const addToast = (toastObj) => {
+    const id = 'toast-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4);
+    const newToast = { id, ...toastObj };
+    setToasts((prev) => [...prev, newToast]);
+    setTimeout(() => {
+      dismissToast(id);
+    }, 5000);
+  };
+
+  const dismissToast = (id) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
 
   // Track Daily Explorer Streak on load
   useEffect(() => {
@@ -76,6 +92,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-neutral-100 flex flex-col font-sans selection:bg-amber-500/30 selection:text-amber-200">
       
+      {/* Nimiq Environment Status Banner */}
+      <NimiqProviderBanner onOpenWallet={() => setWalletModalOpen(true)} />
+
       {/* Top Header */}
       <Header
         walletState={walletState}
@@ -164,7 +183,11 @@ export default function App() {
         setWalletState={setWalletState}
         onOpenWalletModal={() => setWalletModalOpen(true)}
         onEchoInscribed={() => {}}
+        onShowToast={addToast}
       />
+
+      {/* Global Toast Notification System */}
+      <ToastContainer toasts={toasts} onDismissToast={dismissToast} />
 
       {/* Ambient Soundscape Player */}
       <MuseumSoundscape />

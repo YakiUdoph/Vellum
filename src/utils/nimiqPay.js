@@ -20,6 +20,24 @@ export class NimiqPayError extends Error {
   }
 }
 
+export function isNimiqProviderAvailable() {
+  return typeof window !== 'undefined' && (Boolean(window.nimiq) || Boolean(window.NimiqPay));
+}
+
+/**
+ * Safely check if the Nimiq environment/provider exists before initializing
+ */
+export function checkNimiqEnvironment() {
+  if (typeof window !== 'undefined' && (window.nimiq || window.NimiqPay)) {
+    const provider = window.nimiq || window.NimiqPay;
+    console.log("Nimiq Pay provider detected and initialized successfully:", provider);
+    return { isAvailable: true, provider };
+  } else {
+    console.warn("Running in standard browser mode. Nimiq Pay provider not injected.");
+    return { isAvailable: false, provider: null };
+  }
+}
+
 export const INITIAL_WALLET_STATE = {
   isConnected: true,
   address: 'NQ84 7E71 V3LL UM00 N1M1 Q999 8888',
@@ -177,11 +195,13 @@ export async function initiateNimiqPayment({
     );
   }
 
-  // 1. Real Window SDK Execution
-  if (window.NimiqPay && typeof window.NimiqPay.requestPayment === 'function') {
+  // 1. Real Injected Provider Execution (window.nimiq or window.NimiqPay)
+  const activeProvider = (typeof window !== 'undefined') && (window.NimiqPay || window.nimiq);
+  if (activeProvider && (typeof activeProvider.requestPayment === 'function' || typeof activeProvider.pay === 'function')) {
     try {
       if (onProgressStep) onProgressStep('signing', 'Opening Nimiq Pay Wallet modal...');
-      const paymentResult = await window.NimiqPay.requestPayment({
+      const payFn = activeProvider.requestPayment ? activeProvider.requestPayment.bind(activeProvider) : activeProvider.pay.bind(activeProvider);
+      const paymentResult = await payFn({
         recipient: 'NQ00 VELL UM11 HACK ATHO NMIN IAPP S',
         amount: amount,
         currency: currency,
@@ -191,7 +211,7 @@ export async function initiateNimiqPayment({
       if (onProgressStep) onProgressStep('broadcasting', 'Consensus confirmed by Nimiq PoS ledger.');
       return {
         success: true,
-        txHash: paymentResult.hash || generateTxHash(),
+        txHash: paymentResult.hash || paymentResult.txHash || generateTxHash(),
         currency,
         amount,
       };
