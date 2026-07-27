@@ -1,16 +1,30 @@
-# React + Vite
+# Vellum
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Vellum is a mobile-first historical timeline mini app integrated with Nimiq Pay, allowing users to explore historical milestones while seamlessly processing digital token transactions.
 
-Currently, two official plugins are available:
+## Key Features
+* Historical Timeline: Interactive navigation through key historical events and epochs.
+* Nimiq Pay Integration: Supports dual USDT and NIM payment flows using the Nimiq Pay SDK with robust error handling.
+* Responsive Mobile Layout: Two-tier optimized header and clean mobile-first viewport design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+* Frontend: React, Vite, Tailwind CSS
+* Deployment: Vercel
+* Payment SDK: Nimiq Pay
 
-## React Compiler
+## Setup Instructions
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Clone the repository and run it locally with these terminal commands:
 
-## Expanding the Oxlint configuration
+`bash
+# Clone the repository
+git clone [https://github.com/nyaknno-udofia/vellum.git](https://github.com/nyaknno-udofia/vellum.git)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+# Navigate to project directory
+cd vellum
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
