@@ -39,7 +39,7 @@ export function checkNimiqEnvironment() {
 }
 
 export const INITIAL_WALLET_STATE = {
-  isConnected: true,
+  isConnected: false, // Explicit user action to connect — prevents any auto-connection on page load
   address: 'NQ84 7E71 V3LL UM00 N1M1 Q999 8888',
   displayName: 'Museum Explorer',
   balances: {
@@ -96,12 +96,20 @@ export function calculatePatronRank(bonusPoints) {
 // Retrieve persisted wallet state
 export function getSavedWalletState() {
   try {
+    const session = localStorage.getItem('nimiq_wallet_session');
     const data = localStorage.getItem(LOCAL_STORAGE_KEY_WALLET);
-    if (!data) return INITIAL_WALLET_STATE;
+
+    // If no explicit connection session exists, default to disconnected
+    const isConnected = Boolean(session);
+
+    if (!data) {
+      return { ...INITIAL_WALLET_STATE, isConnected };
+    }
     const parsed = JSON.parse(data);
     return {
       ...INITIAL_WALLET_STATE,
       ...parsed,
+      isConnected,
       balances: {
         ...INITIAL_WALLET_STATE.balances,
         ...(parsed.balances || {}),
@@ -109,8 +117,59 @@ export function getSavedWalletState() {
     };
   } catch (err) {
     console.warn('LocalStorage error reading wallet state:', err);
-    return INITIAL_WALLET_STATE;
+    return { ...INITIAL_WALLET_STATE, isConnected: false };
   }
+}
+
+/**
+ * Explicit user action to connect — prevents any auto-connection on page load
+ */
+export async function connectNimiqWallet() {
+  try {
+    const activeProvider = (typeof window !== 'undefined') && (window.nimiqPay || window.NimiqPay || window.nimiq);
+    if (activeProvider && typeof activeProvider.connect === 'function') {
+      const session = await activeProvider.connect();
+      const address = session?.address || 'NQ84 7E71 V3LL UM00 N1M1 Q999 8888';
+      const walletState = {
+        ...getSavedWalletState(),
+        isConnected: true,
+        address,
+      };
+      localStorage.setItem('nimiq_wallet_session', JSON.stringify({ isConnected: true, address }));
+      saveWalletState(walletState);
+      return walletState;
+    } else {
+      console.warn("Nimiq Pay provider not injected.");
+      const walletState = {
+        ...getSavedWalletState(),
+        isConnected: true,
+        address: 'NQ84 7E71 V3LL UM00 N1M1 Q999 8888',
+      };
+      localStorage.setItem('nimiq_wallet_session', JSON.stringify({ isConnected: true, address: walletState.address }));
+      saveWalletState(walletState);
+      return walletState;
+    }
+  } catch (error) {
+    console.error("Wallet connection failed or was cancelled:", error);
+    throw error;
+  }
+}
+
+/**
+ * Explicit user action to disconnect wallet
+ */
+export function disconnectNimiqWallet() {
+  try {
+    localStorage.removeItem('nimiq_wallet_session');
+  } catch (err) {
+    // ignore
+  }
+  const walletState = {
+    ...getSavedWalletState(),
+    isConnected: false,
+  };
+  saveWalletState(walletState);
+  return walletState;
 }
 
 // Save wallet state

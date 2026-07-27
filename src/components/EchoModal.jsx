@@ -28,6 +28,7 @@ export default function EchoModal({
   onEchoInscribed,
   onOpenWalletModal,
   onShowToast,
+  onConnectWallet,
 }) {
   const [reflection, setReflection] = useState('');
   const [authorName, setAuthorName] = useState(walletState.displayName || 'VellumExplorer.nimiq');
@@ -57,12 +58,28 @@ export default function EchoModal({
       return;
     }
 
-    if (!walletState.isConnected) {
-      setErrorObj({
-        code: ERROR_CODES.WALLET_NOT_CONNECTED,
-        message: 'Your Nimiq Pay wallet is currently disconnected.',
-      });
-      return;
+    let activeWallet = walletState;
+
+    // Payment handler requiring manual trigger — connects wallet if disconnected
+    if (!activeWallet.isConnected) {
+      if (onConnectWallet) {
+        try {
+          activeWallet = await onConnectWallet();
+        } catch (connError) {
+          console.error("Wallet connection failed or was cancelled:", connError);
+          setErrorObj({
+            code: ERROR_CODES.WALLET_NOT_CONNECTED,
+            message: 'Wallet connection is required to complete Nimiq Pay micro-transaction.',
+          });
+          return;
+        }
+      } else {
+        setErrorObj({
+          code: ERROR_CODES.WALLET_NOT_CONNECTED,
+          message: 'Your Nimiq Pay wallet is currently disconnected.',
+        });
+        return;
+      }
     }
 
     setErrorObj(null);
@@ -73,7 +90,7 @@ export default function EchoModal({
       const result = await executeNimiqPayTransaction({
         currency: selectedCurrency,
         amount: price,
-        walletState,
+        walletState: activeWallet,
         message: `Vellum Echo: ${artifact.title.slice(0, 30)}`,
         simulationScenario: testScenario,
         onProgressStep: (stepId, stepMsg) => {

@@ -22,6 +22,8 @@ export default function WalletConnector({
   walletState,
   setWalletState,
   streak = { count: 1, multiplier: 1.0 },
+  onConnectWallet,
+  onDisconnectWallet,
 }) {
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState('account'); // 'account' | 'history' | 'diagnostics'
@@ -34,13 +36,30 @@ export default function WalletConnector({
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleToggleConnection = () => {
-    const updated = {
-      ...walletState,
-      isConnected: !walletState.isConnected,
-    };
-    setWalletState(updated);
-    saveWalletState(updated);
+  const handleConnectClick = async () => {
+    if (onConnectWallet) {
+      await onConnectWallet();
+    } else {
+      const updated = {
+        ...walletState,
+        isConnected: true,
+      };
+      setWalletState(updated);
+      saveWalletState(updated);
+    }
+  };
+
+  const handleDisconnectClick = () => {
+    if (onDisconnectWallet) {
+      onDisconnectWallet();
+    } else {
+      const updated = {
+        ...walletState,
+        isConnected: false,
+      };
+      setWalletState(updated);
+      saveWalletState(updated);
+    }
   };
 
   const handleSimulateTopUp = () => {
@@ -218,7 +237,7 @@ export default function WalletConnector({
 
                 {/* Disconnect Action */}
                 <button
-                  onClick={handleToggleConnection}
+                  onClick={handleDisconnectClick}
                   className="w-full py-2.5 px-4 bg-neutral-900 hover:bg-neutral-800 text-neutral-400 hover:text-red-400 text-xs font-medium rounded-xl border border-neutral-800 transition"
                 >
                   Disconnect Wallet
@@ -292,7 +311,7 @@ export default function WalletConnector({
             </div>
 
             <button
-              onClick={handleToggleConnection}
+              onClick={handleConnectClick}
               className="w-full flex items-center justify-center space-x-2 py-3.5 px-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-neutral-950 font-bold text-sm rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-95"
             >
               <Zap className="w-4 h-4" />

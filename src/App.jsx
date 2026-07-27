@@ -10,7 +10,11 @@ import MuseumSoundscape from './components/MuseumSoundscape';
 import NimiqProviderBanner from './components/NimiqProviderBanner';
 import ToastContainer from './components/ToastContainer';
 import artifactsData from './data/artifacts.json';
-import { getSavedWalletState } from './utils/nimiqPay';
+import {
+  getSavedWalletState,
+  connectNimiqWallet,
+  disconnectNimiqWallet,
+} from './utils/nimiqPay';
 import { getUserStreak, recordDailyVisit } from './utils/streak';
 import { Feather } from 'lucide-react';
 
@@ -38,6 +42,38 @@ export default function App() {
 
   const dismissToast = (id) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
+  };
+
+  // Explicit user action to connect — prevents any auto-connection on page load
+  const handleConnectWallet = async () => {
+    try {
+      const updated = await connectNimiqWallet();
+      setWalletState(updated);
+      addToast({
+        type: 'success',
+        title: 'Wallet Connected',
+        message: `Connected Nimiq Pay address: ${updated.address.slice(0, 10)}...`,
+      });
+      return updated;
+    } catch (error) {
+      console.error("Wallet connection failed or was cancelled:", error);
+      addToast({
+        type: 'error',
+        title: 'Connection Failed',
+        message: error.message || 'Wallet connection failed or was cancelled.',
+      });
+      throw error;
+    }
+  };
+
+  const handleDisconnectWallet = () => {
+    const updated = disconnectNimiqWallet();
+    setWalletState(updated);
+    addToast({
+      type: 'warning',
+      title: 'Wallet Disconnected',
+      message: 'Nimiq Pay wallet session cleared.',
+    });
   };
 
   // Track Daily Explorer Streak on load
@@ -172,6 +208,8 @@ export default function App() {
         walletState={walletState}
         setWalletState={setWalletState}
         streak={streak}
+        onConnectWallet={handleConnectWallet}
+        onDisconnectWallet={handleDisconnectWallet}
       />
 
       {/* Inscribe Echo Modal */}
@@ -184,6 +222,7 @@ export default function App() {
         onOpenWalletModal={() => setWalletModalOpen(true)}
         onEchoInscribed={() => {}}
         onShowToast={addToast}
+        onConnectWallet={handleConnectWallet}
       />
 
       {/* Global Toast Notification System */}
