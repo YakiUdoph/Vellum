@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Volume2, VolumeX, Music } from 'lucide-react';
+import { Music } from 'lucide-react';
 
 export default function MuseumSoundscape() {
   const [isPlaying, setIsPlaying] = useState(false);
